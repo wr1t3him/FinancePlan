@@ -267,3 +267,5 @@ __pycache__/
 FinancePlan/App_Start/IdentityConfig.cs
 FinancePlan/App_Start/RouteConfig.cs
 FinancePlan/Startup.cs
+FinancePlan/Models/IdentityModels.cs
+FinancePlan/Models/IdentityModels.cs
