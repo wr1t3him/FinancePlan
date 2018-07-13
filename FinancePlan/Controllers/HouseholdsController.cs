@@ -6,13 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BugTrack.Assist;
 using FinancePlan.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancePlan.Controllers
 {
     public class HouseholdsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserRolesHelper rolehelper = new UserRolesHelper();
 
         // GET: Households
         public ActionResult Index()
@@ -27,7 +30,9 @@ namespace FinancePlan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Household household = db.Households.Find(id);
+            //var members = db.Users.Where(h => h.HouseholdID == id);
             if (household == null)
             {
                 return HttpNotFound();
@@ -50,8 +55,16 @@ namespace FinancePlan.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userID = User.Identity.GetUserId();
+                rolehelper.AddUserToRole(userID, "Owner");
+
                 db.Households.Add(household);
                 db.SaveChanges();
+
+                var user = db.Users.Find(userID);
+                user.HouseholdID = household.ID;
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

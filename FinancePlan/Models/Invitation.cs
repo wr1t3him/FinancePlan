@@ -11,6 +11,7 @@ namespace FinancePlan.Models
         public DateTime Created { get; set; }
         public string Email { get; set; }
         public string Body { get; set; }
+        public string code { get; set; }
         public int Lifespan { get; set; }
         public int HouseholdID { get; set; }
 
