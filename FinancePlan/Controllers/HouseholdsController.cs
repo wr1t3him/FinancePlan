@@ -47,7 +47,8 @@ namespace FinancePlan.Controllers
         [Authorize]
         public ActionResult HouseMembers (int? id)
         {
-             return View();
+
+             return View(db.Users.Where(u => u.HouseholdID == id).ToList());
         }
 
 

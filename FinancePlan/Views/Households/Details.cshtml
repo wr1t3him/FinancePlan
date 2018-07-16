@@ -17,15 +17,6 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
-        <dt>
-            @Html.DisplayName("Members")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Users.Where(h => h.HouseholdID == model.ID))
-        </dd>
-
     </dl>
 </div>
 <p>

@@ -7,6 +7,7 @@ namespace FinancePlan.ViewModels
 {
     public class AcceptInviteViewModel
     {
+        public int HouseholdID { get; set; }
         public string Email { get; set; }
         public string Code { get; set; }
     }

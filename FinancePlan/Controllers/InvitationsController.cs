@@ -11,6 +11,8 @@ using BugTrack.Assist;
 using FinancePlan.Models;
 using Microsoft.AspNet.Identity;
 using FinancePlan.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace FinancePlan.Controllers
 {
     public class InvitationsController : Controller
@@ -95,7 +97,8 @@ namespace FinancePlan.Controllers
             var acceptInviteVM = new AcceptInviteViewModel
             {
                 Email = email,
-                Code = houseCode
+                Code = houseCode,
+                HouseholdID = db.Invitations.FirstOrDefault(i => i.code == houseCode).HouseholdID
             };
             return View(acceptInviteVM);
         }
@@ -103,12 +106,30 @@ namespace FinancePlan.Controllers
         [HttpPost]
         public ActionResult Join(AcceptInviteViewModel acceptInviteVM)
         {
-            var userId = User.Identity.GetUserId();
-
             var invite = db.Invitations.FirstOrDefault(i => i.Email == acceptInviteVM.Email && i.code == acceptInviteVM.Code);
+            //var userId = User.Identity.GetUserId();
+            var userManager = new UserManager<ApplicationUser>(
+            new UserStore<ApplicationUser>(db));
+            var userID = userManager.FindByEmail(acceptInviteVM.Email).Id;
 
-            if(invite != null)
+            if (userID == null && invite != null)
             {
+                userManager.Create(new ApplicationUser
+                {
+                    UserName = acceptInviteVM.Email,
+                    Email = acceptInviteVM.Email,
+                    HouseholdID = acceptInviteVM.HouseholdID
+                }, "Abc&123");
+
+
+                userManager.AddToRole(userID, "Adult");
+                db.SaveChanges();
+
+                TempData["sweetMsg"] = "Thank you for accepting my invitation, you are now a Household Member!";
+            }
+            else if (invite != null)
+            {
+                var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
                 user.HouseholdID = invite.HouseholdID;
                 roleHelper.AddUserToRole(userId, "Adult");
@@ -118,6 +139,7 @@ namespace FinancePlan.Controllers
                 TempData["sweetMsg"] = "Thank you for accepting my invitation, you are now a Household Member!";
             }
             return RedirectToAction("Index", "Home");
+        
         }
 
         // GET: Invitations/Edit/5
