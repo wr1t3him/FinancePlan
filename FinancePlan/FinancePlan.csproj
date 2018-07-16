@@ -256,6 +256,18 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Spectre_status.jpg" />
     <Content Include="Template\NiceAdmin\blank.html" />
+    <Content Include="Template\NiceAdmin\css\bootstrap-theme.css" />
+    <Content Include="Template\NiceAdmin\css\bootstrap.min.css" />
+    <Content Include="Template\NiceAdmin\css\elegant-icons-style.css" />
+    <Content Include="Template\NiceAdmin\css\font-awesome.min.css" />
+    <Content Include="Template\NiceAdmin\css\style-responsive.css" />
+    <Content Include="Template\NiceAdmin\css\style.css" />
+    <Content Include="Template\NiceAdmin\img\avatar1_small.jpg" />
+    <Content Include="Template\NiceAdmin\js\bootstrap.min.js" />
+    <Content Include="Template\NiceAdmin\js\jquery.js" />
+    <Content Include="Template\NiceAdmin\js\jquery.nicescroll.js" />
+    <Content Include="Template\NiceAdmin\js\jquery.scrollTo.min.js" />
+    <Content Include="Template\NiceAdmin\js\scripts.js" />
     <Content Include="Template\now-ui-dashboard-master\examples\dashboard.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

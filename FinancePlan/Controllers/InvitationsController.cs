@@ -112,7 +112,7 @@ namespace FinancePlan.Controllers
             new UserStore<ApplicationUser>(db));
             var userID = userManager.FindByEmail(acceptInviteVM.Email).Id;
 
-            if (userID == null && invite != null)
+            if (userID == null)
             {
                 userManager.Create(new ApplicationUser
                 {
