@@ -1,0 +1,32 @@
+﻿@model FinancePlan.Models.Household
+
+@{
+    ViewBag.Title = "LeaveHouse";
+}
+
+<h4>Are You Sure You Want to Quit This Household?</h4>
+
+<body>
+    @using (Html.BeginForm("LeaveHouse", "Households", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+    {
+
+        @Html.Hidden("HouseHoldID", (int)ViewBag.HouseholdID)
+        <label class="container">
+            Yes
+            <input type="checkbox" name="Leave" value="true">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">
+            No
+            <input type="checkbox" name="Leave" value="false">
+            <span class="checkmark"></span>
+        </label>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+</body>

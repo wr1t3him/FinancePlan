@@ -328,6 +328,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Invitations\Join.cshtml" />
+    <Content Include="Views\Households\HouseMembers.cshtml" />
+    <Content Include="Views\Households\LeaveHouse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

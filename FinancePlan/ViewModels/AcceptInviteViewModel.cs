@@ -10,4 +10,11 @@ namespace FinancePlan.ViewModels
         public string Email { get; set; }
         public string Code { get; set; }
     }
+
+    public class ViewUsers
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int? HouseholdID { get; set; }
+    }
 }

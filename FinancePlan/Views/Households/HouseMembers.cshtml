@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FinancePlan.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "HouseMembers";
+}
+
+<h2>Details</h2>
+
+<table id="HouseMemberTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("First Name")
+            </th>
+            <th>
+                @Html.DisplayName("Last Name")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => user.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.LastName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $('#HouseMemberTable').DataTable();
+    </script>
+}

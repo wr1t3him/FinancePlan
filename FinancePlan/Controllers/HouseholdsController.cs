@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using BugTrack.Assist;
 using FinancePlan.Models;
+using FinancePlan.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace FinancePlan.Controllers
@@ -32,13 +34,20 @@ namespace FinancePlan.Controllers
             }
 
             Household household = db.Households.Find(id);
-            //var members = db.Users.Where(h => h.HouseholdID == id);
+            
             if (household == null)
             {
                 return HttpNotFound();
             }
             return View(household);
         }
+
+        [Authorize]
+        public ActionResult HouseMembers (int? id)
+        {
+             return View();
+        }
+
 
         // GET: Households/Create
         public ActionResult Create()
@@ -100,6 +109,30 @@ namespace FinancePlan.Controllers
                 return RedirectToAction("Index");
             }
             return View(household);
+        }
+
+        
+        [Authorize]
+        public ActionResult LeaveHouse (int id)
+        {
+            ViewBag.HouseholdID = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LeaveHouse(bool Leave, int householdID)
+        {
+            if(User.Identity.IsAuthenticated && Leave)
+            {
+                var user = db.Users.Find(User.Identity.GetUserId());
+                user.HouseholdID = null;
+                user.Household.Name = null;
+                
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
 
         // GET: Households/Delete/5
