@@ -20,12 +20,14 @@ namespace FinancePlan.Controllers
         private UserRolesHelper rolehelper = new UserRolesHelper();
 
         // GET: Households
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Households.ToList());
+            return View(db.Households.Where(i => i.deleted != true).ToList());
         }
 
         // GET: Households/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,6 +52,7 @@ namespace FinancePlan.Controllers
 
 
         // GET: Households/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -81,6 +84,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Households/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -136,6 +140,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Households/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -30,11 +30,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Household", "Index", "Households")</li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Owner"))
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Owner") || User.IsInRole("Admin"))
                     {
                         var userId = User.Identity.GetUserId();
-                        var houseId = db.Users.Find(userId).HouseholdID;                     
+                        var houseId = db.Users.Find(userId).HouseholdID;
                         <li>@Html.ActionLink("Send Invite", "Create", "Invitations", new { houseId = houseId }, null)</li>
+                        <li>@Html.ActionLink("People", "Index", "User")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

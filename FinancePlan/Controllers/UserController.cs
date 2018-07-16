@@ -15,6 +15,7 @@ namespace FinancePlan.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: User
+        [Authorize]
         public ActionResult Index()
         {
             var applicationUsers = db.Users.Include(a => a.Household);
@@ -22,6 +23,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: User/Details/5
+        [Authorize]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: User/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.HouseholdID = new SelectList(db.Households, "ID", "Name");
@@ -62,6 +65,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: User/Edit/5
+        [Authorize]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -95,6 +99,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: User/Delete/5
+        [Authorize]
         public ActionResult Delete(string id)
         {
             if (id == null)

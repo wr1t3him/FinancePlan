@@ -19,6 +19,7 @@ namespace FinancePlan.Controllers
         private UserRolesHelper roleHelper = new UserRolesHelper();
 
         // GET: Invitations
+        [Authorize]
         public ActionResult Index()
         {
             var invitations = db.Invitations.Include(i => i.Household);
@@ -26,6 +27,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Invitations/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,6 +43,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Invitations/Create
+        [Authorize]
         public ActionResult Create(int houseID)
         {
             ViewBag.HouseholdID = houseID;
@@ -118,6 +121,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Invitations/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -151,6 +155,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Invitations/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
