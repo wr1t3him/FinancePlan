@@ -100,7 +100,7 @@ namespace FinancePlan.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Household household)
+        public ActionResult Edit([Bind(Include = "ID,Name, deleted")] Household household)
         {
             if (ModelState.IsValid)
             {
