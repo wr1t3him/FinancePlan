@@ -16,13 +16,13 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.value, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10">@*Total sum of max budget*@
                 @Html.EditorFor(model => model.value, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.value, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group">@*This can be cut. Should be same as value upon creation. Through edit this will change.*@
             @Html.LabelFor(model => model.balance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.balance, new { htmlAttributes = new { @class = "form-control" } })
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group">@*This can be referenced by the user*@
             @Html.LabelFor(model => model.HouseHoldID, "HouseHoldID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("HouseHoldID", null, htmlAttributes: new { @class = "form-control" })
