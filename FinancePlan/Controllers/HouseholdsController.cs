@@ -109,13 +109,17 @@ namespace FinancePlan.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(household).State = EntityState.Modified;
+                db.Entry(household).State = EntityState.Modified;            
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(household);
         }
 
+        public ActionResult HouseDashboard()
+        {
+            return View();
+        }
         
         [Authorize]
         public ActionResult LeaveHouse (int id)

@@ -256,19 +256,25 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Spectre_status.jpg" />
     <Content Include="Template\NiceAdmin\blank.html" />
+    <Content Include="Template\NiceAdmin\buttons.html" />
     <Content Include="Template\NiceAdmin\css\bootstrap-theme.css" />
     <Content Include="Template\NiceAdmin\css\bootstrap.min.css" />
     <Content Include="Template\NiceAdmin\css\elegant-icons-style.css" />
     <Content Include="Template\NiceAdmin\css\font-awesome.min.css" />
     <Content Include="Template\NiceAdmin\css\style-responsive.css" />
     <Content Include="Template\NiceAdmin\css\style.css" />
+    <Content Include="Template\NiceAdmin\form_component.html" />
+    <Content Include="Template\NiceAdmin\form_validation.html" />
+    <Content Include="Template\NiceAdmin\grids.html" />
     <Content Include="Template\NiceAdmin\img\avatar1_small.jpg" />
     <Content Include="Template\NiceAdmin\js\bootstrap.min.js" />
     <Content Include="Template\NiceAdmin\js\jquery.js" />
     <Content Include="Template\NiceAdmin\js\jquery.nicescroll.js" />
     <Content Include="Template\NiceAdmin\js\jquery.scrollTo.min.js" />
     <Content Include="Template\NiceAdmin\js\scripts.js" />
+    <Content Include="Template\NiceAdmin\widgets.html" />
     <Content Include="Template\now-ui-dashboard-master\examples\dashboard.html" />
+    <Content Include="Template\now-ui-dashboard-master\examples\icons.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -343,6 +349,7 @@
     <Content Include="Views\Invitations\Join.cshtml" />
     <Content Include="Views\Households\HouseMembers.cshtml" />
     <Content Include="Views\Households\LeaveHouse.cshtml" />
+    <Content Include="Views\Households\HouseDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
