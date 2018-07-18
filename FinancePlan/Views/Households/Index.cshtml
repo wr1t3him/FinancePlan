@@ -1,21 +1,23 @@
 ﻿@model IEnumerable<FinancePlan.Models.Household>
+@using FinancePlan.Models
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@{
+    var db = new ApplicationDbContext();
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Your House</h2>
 
-@if (User.IsInRole("Owner"))
+@if (!User.IsInRole("Owner"))
 {
     <p>
-        @Html.ActionLink("Create Bank Info", "Create", "Banks")
+        @Html.ActionLink("Create New House", "Create")
     </p>
 }
+
 
 <table class="table">
     <tr>

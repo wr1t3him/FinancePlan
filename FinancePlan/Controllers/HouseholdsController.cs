@@ -23,6 +23,10 @@ namespace FinancePlan.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            //var userID = User.Identity.GetUserId();
+            //var house = db.Households.Find();
+            //var myhouse = db.Households.Where(i => i.deleted == false).Include(x => x.ID == house.ID).ToList();
+
             return View(db.Households.Where(i => i.deleted != true).ToList());
         }
 
