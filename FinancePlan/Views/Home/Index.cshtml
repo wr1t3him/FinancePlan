@@ -7,6 +7,9 @@
     @if (User.Identity.IsAuthenticated)
     {
         <p class="lead">Greetings!</p>
+        <div>Let's get you started!</div>
+        <div>Build Your Household by clicking <a href=@Url.Action("Create", "Households")>here</a></div>
+        @*<div>Or Join A Household by clicking here</div>*@
     }
     else
     {
