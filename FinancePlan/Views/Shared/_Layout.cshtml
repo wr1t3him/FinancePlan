@@ -281,10 +281,10 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                                <a href=@Url.Action("Edit", "User", new { id=User.Identity.GetUserId()})><i class="icon_profile"></i> Edit Profile</a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                               @Html.Partial("_LoginPartial")
                             </li>
                             <li>
                                 <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
@@ -339,7 +339,7 @@
 
                         <li class="sub-menu">
                             <a href=@Url.Action("Create", "Invitations",  new { houseId = houseID }) class="">
-                                <i class="icon_desktop"></i>
+                                <i class="icon_mail"></i>
                                 <span>Create House Invite</span>
                             </a>
                         </li>
