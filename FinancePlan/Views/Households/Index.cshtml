@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FinancePlan.Models.Household>
+﻿@model FinancePlan.Models.Household
 @using FinancePlan.Models
 
 @{
@@ -27,24 +27,22 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => Model.Name)
             </td>
             <td>
-                @Html.ActionLink("House Members", "HouseMembers", new { id = item.ID }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("House Members", "HouseMembers", new { id = Model.ID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = Model.ID }) |
                 @*@Html.ActionLink("Leave", "LeaveHouse", new { id = item.ID }) |*@
                 @if (User.IsInRole("Owner"))
                 {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
                 }
 
             </td>
         </tr>
-    }
+
 
 </table>

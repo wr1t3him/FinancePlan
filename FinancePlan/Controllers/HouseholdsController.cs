@@ -20,14 +20,13 @@ namespace FinancePlan.Controllers
         private UserRolesHelper rolehelper = new UserRolesHelper();
 
         // GET: Households
+        //How do we know which household to display
         [Authorize]
         public ActionResult Index()
         {
-            //var userID = User.Identity.GetUserId();
-            //var house = db.Households.Find();
-            //var myhouse = db.Households.Where(i => i.deleted == false).Include(x => x.ID == house.ID).ToList();
-
-            return View(db.Households.Where(i => i.deleted != true).ToList());
+            var userID = User.Identity.GetUserId();
+            var householdId = db.Users.Find(userID).HouseholdID;                   
+            return View(db.Households.Find(householdId));
         }
 
         // GET: Households/Details/5

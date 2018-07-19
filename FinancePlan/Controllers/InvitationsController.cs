@@ -72,7 +72,7 @@ namespace FinancePlan.Controllers
                 var email = new IdentityMessage()
                 {
                     Subject = string.Format("Invitation to the " + houseName + " {0}", houseName),
-                    Body = invitation.Body + invitation.code + "<br /> Please accept this invitation by clicking <a href=\"" + callbackurl + "\">here</a>",
+                    Body = invitation.Body + "<br /> Please accept this invitation by clicking <a href=\"" + callbackurl + "\">here</a>",
                     Destination = invitation.Email
                 };
 
@@ -110,9 +110,9 @@ namespace FinancePlan.Controllers
             //var userId = User.Identity.GetUserId();
             var userManager = new UserManager<ApplicationUser>(
             new UserStore<ApplicationUser>(db));
-            var userID = userManager.FindByEmail(acceptInviteVM.Email).Id;
+            var user = userManager.FindByEmail(acceptInviteVM.Email);
 
-            if (userID == null)
+            if (user == null)
             {
                 userManager.Create(new ApplicationUser
                 {
@@ -121,18 +121,19 @@ namespace FinancePlan.Controllers
                     HouseholdID = acceptInviteVM.HouseholdID
                 }, "Abc&123");
 
+                var userId = userManager.FindByEmail(acceptInviteVM.Email).Id;
 
-                userManager.AddToRole(userID, "Adult");
+                userManager.AddToRole(userId, "Adult");
                 db.SaveChanges();
 
                 TempData["sweetMsg"] = "Thank you for accepting my invitation, you are now a Household Member!";
             }
             else if (invite != null)
             {
-                var userId = User.Identity.GetUserId();
-                var user = db.Users.Find(userId);
+                //var userId = User.Identity.GetUserId();
+                //user = db.Users.Find(userId);
                 user.HouseholdID = invite.HouseholdID;
-                roleHelper.AddUserToRole(userId, "Adult");
+                roleHelper.AddUserToRole(user.Id, "Adult");
 
                 db.SaveChanges();
 
