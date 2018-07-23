@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancePlan.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancePlan.Controllers
 {
@@ -15,6 +16,7 @@ namespace FinancePlan.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Accounts
+        [Authorize]
         public ActionResult Index()
         {
             var accounts = db.Accounts.Include(a => a.Bank).Include(a => a.Household);
@@ -22,6 +24,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Accounts/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,10 +40,18 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Accounts/Create
+        [Authorize]
         public ActionResult Create()
         {
+            var person = User.Identity.GetUserId();
+            var customuser = db.Users.Find(person).FirstName;
+            //var house = db.Users.Find(person).HouseholdID;
+            //var myhouse = db.Households.Find(house);
+            //var banklist = db.Banks.Find(person).ID;
+
             ViewBag.BankID = new SelectList(db.Banks, "ID", "Name");
             ViewBag.HouseholdID = new SelectList(db.Households, "ID", "Name");
+            ViewBag.UserID = customuser;
             return View();
         }
 
@@ -49,10 +60,14 @@ namespace FinancePlan.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Balance,Type,UserID,HouseholdID,BankID")] Account account)
+        public ActionResult Create([Bind(Include = "ID,Balance,Type,HouseholdID,BankID")] Account account)
         {
+            var person = User.Identity.GetUserId();
+            var personal = db.Users.Find(person).FirstName;
+
             if (ModelState.IsValid)
             {
+                account.UserID = person;
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -64,6 +79,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Accounts/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +115,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Accounts/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
