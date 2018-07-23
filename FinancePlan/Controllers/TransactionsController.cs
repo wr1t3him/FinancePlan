@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancePlan.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancePlan.Controllers
 {
@@ -15,6 +16,7 @@ namespace FinancePlan.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Transactions
+        [Authorize]
         public ActionResult Index()
         {
             var transactions = db.Transactions.Include(t => t.Account);
@@ -22,6 +24,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Transactions/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,8 +40,10 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Transactions/Create
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult Create(int id)
         {
+            ViewBag.BudgetID = id;
             ViewBag.AccountID = new SelectList(db.Accounts, "ID", "Type");
             ViewBag.HouseholdID = new SelectList(db.Households, "ID", "Name");
             return View();
@@ -49,10 +54,14 @@ namespace FinancePlan.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Type,Name,description,Cost,verify,Created,Updated,UserID,HouseholdID,AccountID")] Transaction transaction)
+        public ActionResult Create([Bind(Include = "ID,Type,Name,description,Cost,verify,AccountID")] Transaction transaction)
         {
+            var person = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
+                transaction.Created = DateTime.Now;
+                transaction.UserID = person;
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -64,6 +73,7 @@ namespace FinancePlan.Controllers
         }
 
         // GET: Transactions/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)

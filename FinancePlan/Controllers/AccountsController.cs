@@ -63,7 +63,7 @@ namespace FinancePlan.Controllers
         public ActionResult Create([Bind(Include = "ID,Balance,Type,HouseholdID,BankID")] Account account)
         {
             var person = User.Identity.GetUserId();
-            var personal = db.Users.Find(person).FirstName;
+            //var personal = db.Users.Find(person).FirstName;
 
             if (ModelState.IsValid)
             {

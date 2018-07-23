@@ -70,6 +70,9 @@ namespace FinancePlan.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "profilepic")]
+        public string profilepic { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

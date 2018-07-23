@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FinancePlan.Models;
+using System.IO;
 
 namespace FinancePlan.Controllers
 {
@@ -147,16 +148,24 @@ namespace FinancePlan.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    var filename = Path.GetFileName(file.FileName).Replace(" ", "_");
+                    file.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), filename));
+                    model.profilepic = "/Uploads/" + filename;
+                }
+
                 var user = new ApplicationUser {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     UserName = model.Email,
                     displayname = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    profilepic = model.profilepic
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
