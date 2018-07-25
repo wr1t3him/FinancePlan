@@ -46,7 +46,7 @@ namespace FinancePlan.Controllers
             var person = User.Identity.GetUserId();
             var customuser = db.Users.Find(person).FirstName;
             //var house = db.Users.Find(person).HouseholdID;
-            //var myhouse = db.Households.Find(house);
+            //var myhouse = db.Users.Find(person).Household;
             //var banklist = db.Banks.Find(person).ID;
 
             ViewBag.BankID = new SelectList(db.Banks, "ID", "Name");

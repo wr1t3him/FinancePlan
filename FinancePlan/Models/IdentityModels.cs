@@ -61,5 +61,7 @@ namespace FinancePlan.Models
         public System.Data.Entity.DbSet<FinancePlan.Models.Invitation> Invitations { get; set; }
 
         public System.Data.Entity.DbSet<FinancePlan.Models.Transaction> Transactions { get; set; }
+
+        public System.Data.Entity.DbSet<FinancePlan.Models.BudgetItem> BudgetItems { get; set; }
     }
 }

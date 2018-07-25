@@ -24,9 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.BudgetType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BudgetItem)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -45,9 +42,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BudgetType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BudgetItem)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
