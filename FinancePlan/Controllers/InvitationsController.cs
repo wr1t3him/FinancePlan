@@ -91,7 +91,7 @@ namespace FinancePlan.Controllers
             }
         }
 
-        [Authorize]
+        
         public ActionResult Join(string email, string houseCode)
         {
             var acceptInviteVM = new AcceptInviteViewModel
